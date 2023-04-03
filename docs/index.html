@@ -17,7 +17,7 @@
         function digestMessage(message) {
           const encoder = new TextEncoder();
           const data = encoder.encode(message);
-            const hash = Crypto.subtle.digest('SHA-256', data).then((hash)=>hash);
+            const hash = crypto.subtle.digest('SHA-256', data).then((hash)=>hash);
           return hash;
         }
         function checkInputNumber(e) {
