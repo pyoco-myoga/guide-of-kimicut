@@ -14,10 +14,10 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"
         integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script>
-        function digestMessage(message) {
+        async function digestMessage(message) {
           const encoder = new TextEncoder();
           const data = encoder.encode(message);
-            const hash = crypto.subtle.digest('SHA-256', data).then((hash)=>hash);
+            const hash = crypto.subtle.digest('SHA-256', data);
           return hash;
         }
         function checkInputNumber(e) {
@@ -32,13 +32,13 @@
         $(document).on("keydown", "#month", checkInputNumber);
         $(document).on("keydown", "#date", checkInputNumber);
 
-        $(document).on("click", "#answer", () => {
+        $(document).on("click", "#answer", async () => {
             const n = $("#number1").val() * $("#number2").val() * $("#month").val() * $("#date").val();
 
-            console.log(digestMessage(n));
+            const hash = await digestMessage(n);
 
             const url = `https://youtu.be/${n}zhjwTQGo`;
-            // window.location.href = url;
+            window.location.href = url;
         });
     </script>
     <title>センシティブ切り抜きへのみちしるべのページ</title>
